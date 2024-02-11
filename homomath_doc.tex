@@ -1,0 +1,98 @@
+%% homomath_doc.tex
+%% Copyright 2023 Elkeid Me
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2008 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Elkeid Me.
+%
+% This work consists of the file homomath.sty, and its
+% documentation homomath_doc.tex.
+
+\PassOptionsToPackage{no-math}{fontspec}
+\documentclass[a4paper]{ctexart}
+\usepackage[complement, emptyset, expl, expl2]{homomath}
+\usepackage[colorlinks]{hyperref}
+
+\title{\textsf{homomath} 手册}
+\author{Elkeid Me}
+\date{\today v\homomathversion}
+
+\begin{document}
+    \maketitle
+
+    \section{简介}
+
+    \textsf{homomath} 包旨在增强数学排版.
+
+    \section{包选项}
+
+    \begin{itemize}
+        \item \verb|complement|, \verb|emptyset| 和 \verb|expl|.
+        \item \verb|all|, 启用除 \verb|expl| 的所有特性.
+    \end{itemize}
+
+    \section{普通数学符号}
+
+    提供了如下命令:
+
+    \begin{itemize}
+        \item \verb|\N|, 输出自然数集符号 $\N$.
+        \item \verb|\Z|, 输出整数集符号 $\Z$.
+        \item \verb|\Q|, 输出有理数域符号 $\Q$.
+        \item \verb|\R|, 输出实数域符号 $\R$.
+        \item \verb|\C|, 输出复数域符号 $\C$.
+        \item \verb|\e|, 输出自然对数的底 $\e$.
+        \item \verb|\i|, 输出虚数单位 $\i$.
+        \item \verb|\dom|, 输出集合/二元关系的定义域 $\dom$.
+        \item \verb|\ran|, 输出集合/二元关系的值域 $\ran$.
+        \item \verb|\fld|, 输出集合/二元关系的域 $\fld$.
+        \item \verb|\card|, 输出集合的基数 $\card$.
+    \end{itemize}
+
+    以上命令, 只在数学模式下生效. 例如, \verb|\N| 在非数学模式下报错, 而 \verb|\i| 在非数学模式下为默认的 \i, 而不是虚数单位 $\i$.
+
+    包选项 \verb|complement| 修改补集运算符 \verb|\complement| 为 $\complement$ 以匹配北京大学出版社《离散数学教程》. 原本的补集运算符 $\originalcomplement$ 可以用 \verb|\originalcomplement| 输入.
+
+    包选项 \verb|emptyset| 修改空集符号 \verb|\emptyset| 为 $\emptyset$, 即将 \verb|\emptyset| 作为 \verb|\varnothing| 的别名. 原本的空集符号 $\originalemptyset$ 可以用 \verb|\originalemptyset| 输入.
+
+    包选项 \verb|expl| 启用实验性功能: 可以使用 \verb|\<-|, \verb|\<--|, \verb|\<=|, \verb|\<==|, \verb|\->|, \verb|\-->|, \verb|\=>|, \verb|\==>|, \verb|\<->|, \verb|\<-->|, \verb|\<=>|, \verb|\<==>| 直接输入:
+    \[ \<-, \<--, \<=, \<==, \->, \-->, \=>, \==>, \<->, \<-->, \<=>, \<==> \]
+
+    \section{集合与有序对/有序组}
+    提供了命令 \verb|\set[]{}| 和 \verb|\pair[]{}|, 用于快速输入集合和有序对/有序组. 示例如下:
+
+    \begin{itemize}
+        \item \verb|\set{1, 1, 4}| 输出:
+        \[ \set{1, 1, 4} \]
+        \item \verb|\set{\set{1, 1, 4}, \set{1, 1, 4, 5, 1, 4}}| 输出:
+        \[ \set{\set{1, 1, 4}, \set{1, 1, 4, 5, 1, 4}} \]
+        \item \verb|\set{\frac{1}{5}, 1, 4}| 输出:
+        \[ \set{\frac{1}{5}, 1, 4} \]
+
+        但是啊，这种定界符在美学上是不恰当的. 因此 \verb|\set| 命令提供了可选参数. 例如:
+
+        \item \verb|\set[auto]{\frac{1}{5}, 1, 4}| 输出:
+        \[ \set[auto]{\frac{1}{5}, 1, 4} \]
+        相当于 \verb|\left\{ \frac{1}{5}, 1, 4 \right\}|.
+
+        如果你不喜欢 \verb|auto| 参数自动确定的定界符尺寸, 也可以手动确定. 如:
+        \item \verb|\set[big]{\frac{1}{5}, 1, 4}| 和 \verb|\set[Big]{\frac{1}{5}, 1, 4}| 分别输出:
+        \[ \set[big]{\frac{1}{5}, 1, 4} \quad \set[Big]{\frac{1}{5}, 1, 4} \]
+        前者相当于 \verb|\bigl\{ \frac{1}{5}, 1, 4 \bigr\}|, 后者相当于 \\ \verb|\Bigl\{ \frac{1}{5}, 1, 4 \Bigr\}|.
+    \end{itemize}
+
+    \verb|\pair[]{}| 也是类似的. \verb|\pair{1, 1, 4}|、\verb|\pair[auto]{\frac{1}{5}, 1, 4}| 和 \verb|\pair[Big]{\frac{1}{5}, 1, 4}| 分别输出:
+    \[ \pair{1, 1, 4} \quad \pair[auto]{\frac{1}{5}, 1, 4} \quad \pair[Big]{\frac{1}{5}, 1, 4} \]
+
+    \section{版本号}
+
+    提供了 \verb|\homomathversion| 用于打印 \textsf{homomath} 的版本号. 当前版本为 v\homomathversion.
+\end{document}
